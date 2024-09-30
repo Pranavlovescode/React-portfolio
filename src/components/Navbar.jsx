@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {Link as ScrollLink} from "react-scroll"
+
 
 export default function Navbar() {
   const [focus, setFocus] = useState("home");
@@ -57,55 +59,67 @@ export default function Navbar() {
           >
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <a
+                <ScrollLink
                   onClick={() => setFocus("home")}
-                  href="#"
-                  className={`block py-2 px-3  bg-blue-700 rounded md:bg-transparent md:p-0  ${
+                  to="home"
+                  smooth={true}
+                  spy={true}
+                  duration={500}
+                  className={`cursor-pointer block py-2 px-3  bg-blue-700 rounded md:bg-transparent md:p-0  ${
                     focus === "home" ? "md:dark:text-blue-500" : "text-white"
                   }`}
                   aria-current="page"
                 >
                   Home
-                </a>
+                </ScrollLink>
               </li>
               <li>
-                <a
-                  href="#"
+                <ScrollLink
+                  to="about" 
+                  duration={500}
+                  smooth={true}
+                  spy={true}
                   onClick={() => setFocus("about")}
-                  className={`block py-2 px-3 md:p-0 md:dark:hover:text-blue-500 dark:text-white  dark:hover:text-white md:dark:hover:bg-transparent ${
+                  className={`cursor-pointer block py-2 px-3 md:p-0 md:dark:hover:text-blue-500 dark:text-white  dark:hover:text-white md:dark:hover:bg-transparent ${
                     focus === "about" ? "md:dark:text-blue-500" : "text-white"
                   }`}
                 >
                   About
-                </a>
+                </ScrollLink>
               </li>
               <li>
-                <a
-                  href="#"
+                <ScrollLink
+                  to="skills"
                   onClick={() => setFocus("services")}
-                  className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
+                  smooth={true}
+                  spy={true}
+                  duration={500}
+                  className={`cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
                     focus === "services"
                       ? "md:dark:text-blue-500"
                       : "text-white"
                   }`}
                 >
-                  Services
-                </a>
+                  Skills
+                </ScrollLink>
               </li>
               <li>
-                <a
-                  href="#"
+                <ScrollLink
+                  to="contact-me"
                   onClick={() => {
                     setFocus("contact");
                   }}
-                  className={`block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
+                  smooth={true}
+                  spy={true}
+                  duration={500}
+                  className={`cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
                     focus === "contact"
                       ? "md:dark:text-blue-500 duration-300"
                       : "text-white"
                   }`}
                 >
-                  Contact
-                </a>
+                  Contact Me
+                </ScrollLink>
               </li>
             </ul>
           </div>
