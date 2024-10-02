@@ -1,13 +1,14 @@
 import React from "react";
-import About from "./About";
-import ContactMe from "./ContactMe";
-import Skills from "./Skills";
+import About from "../components/About";
+import ContactMe from "../components/ContactMe";
+import Skills from "../components/Skills";
+import LandingPage from "../components/LandingPage";
 
 export default function Home() {
   return (
     <>
       <div className="pt-20 h-screen bg-lime-100" id="home">
-
+        <LandingPage/>
       </div>
       <div className="pt-20 h-screen bg-lime-200" id="about">
         <About/>

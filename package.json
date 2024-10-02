@@ -10,11 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@react-three/drei": "^9.114.0",
+    "@react-three/fiber": "^8.17.9",
+    "framer-motion": "^11.9.0",
     "ip-exp-6": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "react-scroll": "^1.9.0"
+    "react-scroll": "^1.9.0",
+    "react-tilt": "^1.0.2",
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
