@@ -14,6 +14,7 @@
     "@react-three/drei": "^9.114.0",
     "@react-three/fiber": "^8.17.9",
     "framer-motion": "^11.9.0",
+    "gltfjsx": "^6.5.2",
     "ip-exp-6": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

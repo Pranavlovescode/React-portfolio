@@ -1,0 +1,63 @@
+import React, { useRef, useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import { Mesh } from "three";
+
+function ManModel() {
+  const manRef = useRef();
+
+  // Loading the GLTF model
+  const { scene } = useGLTF("/models/gaming_desktop_pc.glb"); // Adjust with your model path
+
+  useEffect(() => {
+    let id;
+    // const animate = () => {
+    //   if (manRef.current) {
+    //     manRef.current.rotation.y += 0.01; // Rotate around Y-axis
+    //   }
+    //   id = requestAnimationFrame(animate);
+    // };
+    // animate();
+    // return () => cancelAnimationFrame(id);
+  }, []);
+
+  return (
+    <mesh>
+      <hemisphereLight intensity={0.35} groundColor={"black"} />
+      <pointLight intensity={1} />
+      <spotLight
+        position={[-20, 50, 10]}
+        angle={0.15}
+        penumbra={1}
+        intensity={1}      
+      />
+      <primitive
+        ref={manRef}
+        object={scene}
+        scale={0.75}
+        position={[0, -1, -1.5]}
+        rotation={[-0.01, -0.1, -0.1]}
+      />
+    </mesh>
+  );
+}
+
+export default function Avatar() {
+  return (
+    <Canvas
+      frameloop="demand"
+      shadows
+      camera={{ position: [20, 2, 0], fov: 30 }}
+    >
+      <ambientLight intensity={0.5} />
+      <ManModel />
+      <OrbitControls
+        maxPolarAngle={Math.PI / 2}
+        minPolarAngle={Math.PI / 2}
+        enableZoom={false}
+        enablePan={false}
+      />
+      <Preload all/>
+    </Canvas>
+  );
+}
