@@ -23,13 +23,13 @@ function ManModel() {
 
   return (
     <mesh>
-      <hemisphereLight intensity={0.35} groundColor={"black"} />
+      <hemisphereLight intensity={0.35} groundColor="black" />
       <pointLight intensity={1} />
       <spotLight
-        position={[-20, 50, 10]}
+        position={[10, 10, 10]}
         angle={0.15}
-        penumbra={1}
-        intensity={1}      
+        penumbra={2}
+        intensity={5}      
       />
       <primitive
         ref={manRef}
