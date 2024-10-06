@@ -23,7 +23,7 @@ function ManModel() {
 
   return (
     <mesh>
-      <hemisphereLight intensity={0.35} groundColor="black" />
+      <hemisphereLight intensity={2.5} groundColor="green" />
       <pointLight intensity={1} />
       <spotLight
         position={[10, 10, 10]}

@@ -17,13 +17,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="pt-20" id="about">
+        <div className="" id="about">
           <About />
         </div>
-        <div className="pt-20 " id="skills">
+        <div className=" " id="skills">
           <Skills />
         </div>
-        <div className="pt-20 " id="contact-me">
+        <div className=" " id="contact-me">
           <ContactMe />
         </div>
       </div>
