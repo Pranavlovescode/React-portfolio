@@ -1,14 +1,30 @@
 import React from 'react'
 import { Button } from './ui/button'
 
+
 export default function LandingPage() {
+  const downlaodFile=(e)=>{
+    e.preventDefault();
+    fetch('/pranav_titambe_resume.pdf').then(response => response.blob()).then(blob=>{
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'pranav_titambe_resume.pdf';
+      a.click();
+      document.removeChild(a);
+      URL.revokeObjectURL(url);
+    }).catch(err=>console.log(err));
+  }
   return (
     <>
-      <div className='text-white mt-32 text-center'>
-        <h1 className='font-extrabold text-4xl text-blue-300'>Hey How's your day !?</h1>
+      <div className='pt-32 md:pt-0'>
+      <div className='text-blue-300 mt-32 text-center'>
+        <h1 className='font-extrabold text-4xl'>Hey How's your day !?</h1>
       </div>
-      <div>
-        <Button>Click Me</Button>
+      <div className='flex flex-row justify-center items-center pt-8'>
+        <div className='px-3'><Button onClick={downlaodFile} className='bg-gradient-to-tr from-blue-600 '>Resume</Button></div>
+        <div className='px-3'><Button className='bg-gradient-to-tl from-blue-600 '>Know More</Button></div>
+      </div>
       </div>
     </>
   )

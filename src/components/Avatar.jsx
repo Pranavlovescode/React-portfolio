@@ -34,7 +34,7 @@ function ManModel() {
       <primitive
         ref={manRef}
         object={scene}
-        scale={0.55}
+        scale={0.5}
         position={[0, -1, -0.09]}
         rotation={[-0.01, -0.1, -0.1]}
       />
