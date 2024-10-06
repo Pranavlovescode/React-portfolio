@@ -10,12 +10,13 @@ export default function Home() {
   return (
     <>
       <div className="main">
-        <div className=" overflow-hidden w-full m-0">
-          <div className="pt-20 h-screen" id="home">
-            <LandingPage />
+        <div className="flex flex-col md:flex-row justify-center overflow-hidden items-center">
+          <div className="w-full md:pl-11"><LandingPage /></div>
+          <div className="pt-20 h-screen w-full md:pr-10" id="home">
             <Avatar />
           </div>
         </div>
+
         <div className="pt-20" id="about">
           <About />
         </div>

@@ -29,13 +29,13 @@ function ManModel() {
         position={[10, 10, 10]}
         angle={0.15}
         penumbra={2}
-        intensity={5}      
+        intensity={10}      
       />
       <primitive
         ref={manRef}
         object={scene}
-        scale={0.75}
-        position={[0, -1, -1.5]}
+        scale={0.55}
+        position={[0, -1, -0.09]}
         rotation={[-0.01, -0.1, -0.1]}
       />
     </mesh>
@@ -47,7 +47,7 @@ export default function Avatar() {
     <Canvas
       frameloop="demand"
       shadows
-      camera={{ position: [20, 2, 0], fov: 30 }}
+      camera={{ position: [20, 2, 0], fov: 25 }}
     >
       <ambientLight intensity={0.5} />
       <ManModel />
