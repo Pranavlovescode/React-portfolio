@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Card,
   CardContent,
@@ -6,12 +7,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 export default function About() {
   return (
     <>
       <div></div>
-      <div className="mx-auto px-[100px]">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }} // Starts invisible and slightly lower
+        whileInView={{ opacity: 1, x: 0 }} // Fades in and moves up when in view
+        transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+        viewport={{ once: true, amount: 0.4 }} // Animation triggers once, when 20% of the component is visible
+        className="mx-auto px-[100px]"
+      >
+        {/* used card to show the details About me */}
         <Card className="bg-[#ffffff24] shadow-2xl border-transparent">
           <CardHeader>
             <CardTitle className="text-white text-2xl">About Me</CardTitle>
@@ -19,7 +28,7 @@ export default function About() {
               Btw I use Linux 🖥️
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-col md:flex-row justify-center items-center text-white">
+          <CardContent className="flex flex-col md:flex-row justify-evenly items-center text-white">
             <div className="px-5">
               <img
                 src="/pranav-photo-2.png"
@@ -48,7 +57,7 @@ export default function About() {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </motion.div>
     </>
   );
 }

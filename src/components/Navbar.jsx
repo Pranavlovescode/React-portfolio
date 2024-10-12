@@ -6,7 +6,7 @@ export default function Navbar() {
   const [focus, setFocus] = useState("home");
   return (
     <>
-      <nav className=" container bg-gray-900 backdrop-blur supports-[backdropFilter]:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-600">
+      <nav className="bg-gray-900 backdrop-blur supports-[backdropFilter]:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a
             href="/"
