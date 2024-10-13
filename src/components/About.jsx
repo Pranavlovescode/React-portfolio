@@ -11,13 +11,12 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <>
-      <div></div>
+    <>      
       <motion.div
-        initial={{ opacity: 0, y: 50 }} // Starts invisible and slightly lower
+        initial={{ opacity: 0, x: -30}} // Starts invisible and slightly lower
         whileInView={{ opacity: 1, x: 0 }} // Fades in and moves up when in view
-        transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
-        viewport={{ once: true, amount: 0.4 }} // Animation triggers once, when 20% of the component is visible
+        transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
+        viewport={{ once: true, amount: 0.23 }} // Animation triggers once, when 20% of the component is visible
         className="mx-auto px-[100px]"
       >
         {/* used card to show the details About me */}
