@@ -3,7 +3,7 @@ import About from "../components/About";
 import ContactMe from "../components/ContactMe";
 import Skills from "../components/Skills";
 import LandingPage from "../components/LandingPage";
-import Avatar from "../components/Avatar";
+import Avatar from "../components/canvas/Avatar";
 import "./styles.css";
 
 export default function Home() {

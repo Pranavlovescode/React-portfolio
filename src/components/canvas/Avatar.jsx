@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-import { Mesh } from "three";
 
-function ManModel() {
+
+function Computer() {
   const manRef = useRef();
 
   // Loading the GLTF model
@@ -50,7 +50,7 @@ export default function Avatar() {
       camera={{ position: [20, 2, 0], fov: 25 }}
     >
       <ambientLight intensity={0.5} />
-      <ManModel />
+      <Computer />
       <OrbitControls
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 2}
