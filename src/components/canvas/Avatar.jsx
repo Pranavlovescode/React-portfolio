@@ -45,7 +45,7 @@ function Computer() {
 export default function Avatar() {
   return (
     <Canvas
-      frameloop="demand"
+      frameloop="always"
       shadows
       camera={{ position: [20, 2, 0], fov: 25 }}
     >

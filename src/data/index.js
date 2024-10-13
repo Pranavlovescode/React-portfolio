@@ -1,5 +1,5 @@
 
-import {css,docker,html,javascript,typescript,mongodb,nodejs,reactjs,tailwind,threejs,git} from '../assets/index'
+import {css,docker,html,javascript,typescript,mongodb,nodejs,reactjs,tailwind,threejs,git,java,springboot,c,cpp} from '../assets/index'
 const technologies = [
     {
       name: "HTML 5",
@@ -39,13 +39,29 @@ const technologies = [
       icon: threejs,
     },
     {
-      name: "git",
+      name: "Git",
       icon: git,
     },
 
     {
-      name: "docker",
+      name: "Docker",
       icon: docker,
+    },
+    {
+      name: "Java",
+      icon: java,
+    },
+    {
+      name: "Spring Boot",
+      icon: springboot,
+    },
+    {
+      name: "C",
+      icon: c,
+    },
+    {
+      name: "C++",
+      icon: cpp,
     },
   ];
 

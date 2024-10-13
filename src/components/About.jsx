@@ -22,7 +22,7 @@ export default function About() {
         {/* used card to show the details About me */}
         <Card className="bg-[#ffffff24] shadow-2xl border-transparent">
           <CardHeader>
-            <CardTitle className="text-white text-2xl">About Me</CardTitle>
+            <CardTitle className="text-blue-300 text-2xl">About Me</CardTitle>
             <CardDescription className="text-slate-300">
               Btw I use Linux 🖥️
             </CardDescription>

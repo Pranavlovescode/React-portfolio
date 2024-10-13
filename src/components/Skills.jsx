@@ -2,12 +2,12 @@ import React from "react";
 import { technologies } from "../data/index";
 import BallCanvas from "./canvas/Ball";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent, CardFooter } from "./ui/card";
 
 export default function Skills() {
   return (
     <>
-      <h2 className="text-white mt-[300px] p-6 text-[30px] font-semibold px-[100px]">
+      <h2 className="text-blue-300 mt-[300px] p-6 text-[30px] font-semibold px-[100px]">
         My Skills
       </h2>
       <p className="text-white p-6 text-[20px] px-[100px]">
@@ -21,20 +21,18 @@ export default function Skills() {
         className="flex flex-row flex-wrap justify-center gap-20 mt-[100px] px-[100px]"
       >
         {technologies.map((tech) => (
-          <motion.div
-            whileHover={{
-              scale: 1.2,
-              transition: { duration: 0.5 },
-            }}
+          <div            
             className="w-40 h-25"
             key={tech.name}
           >
-            <Card className="bg-[#ffffff24] shadow-2xl border-transparent">
+            <Card className="bg-[#ffffff24] shadow-[10px] border-transparent text-center">
               <CardContent>
                 <BallCanvas icons={tech.icon} />
+                <p className='text-center text-blue-300'>{tech.name}</p>
               </CardContent>
+              {/* <CardFooter className='text-center text-blue-300'>{tech.name}</CardFooter> */}
             </Card>
-          </motion.div>
+          </div>
         ))}
       </motion.div>
     </>

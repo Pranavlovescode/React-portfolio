@@ -9,5 +9,9 @@ import reactjs from './tech/reactjs.png'
 import tailwind from './tech/tailwind.png'
 import threejs from './tech/threejs.svg'
 import typescript from './tech/typescript.png'
+import springboot from './tech/springboot.png'
+import java from './tech/java.png'
+import cpp from './tech/cpp.png'
+import c from './tech/c.png'
 
-export {css,docker,git,html,javascript,mongodb,nodejs,reactjs,tailwind,threejs,typescript};
+export {css,docker,git,html,javascript,mongodb,nodejs,reactjs,tailwind,threejs,typescript,springboot,java,cpp,c};
