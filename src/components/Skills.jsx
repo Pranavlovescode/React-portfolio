@@ -21,13 +21,20 @@ export default function Skills() {
         className="flex flex-row flex-wrap justify-center gap-20 mt-[100px] px-[100px]"
       >
         {technologies.map((tech) => (
-          <div className="w-40 h-25" key={tech.name}>
+          <motion.div
+            whileHover={{
+              scale: 1.2,
+              transition: { duration: 0.5 },
+            }}
+            className="w-40 h-25"
+            key={tech.name}
+          >
             <Card className="bg-[#ffffff24] shadow-2xl border-transparent">
               <CardContent>
                 <BallCanvas icons={tech.icon} />
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         ))}
       </motion.div>
     </>
