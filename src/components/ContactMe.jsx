@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { motion } from "framer-motion";
 import React from "react";
 
 function ContactMe() {
   return (
     <>
-      <div className="mx-auto grid w-[350px] gap-6">
+      <motion.div
+        initial={{ opacity: 0, x: -30 }} // Starts invisible and slightly lower
+        whileInView={{ opacity: 1, x: 0 }} // Fades in and moves up when in view
+        transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
+        viewport={{ once: true, amount: 0.23 }}
+        className="mx-auto grid w-[350px] gap-6"
+      >
         <div className="grid gap-2 text-center">
           <h1 className="text-3xl font-bold text-blue-300 mt-[200px] text-[30px]">
             Contact Me
@@ -60,7 +67,7 @@ function ContactMe() {
             Send
           </Button>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

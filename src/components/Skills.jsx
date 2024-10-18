@@ -21,7 +21,9 @@ export default function Skills() {
         className="flex flex-row flex-wrap justify-center gap-20 mt-[100px] px-[100px]"
       >
         {technologies.map((tech) => (
-          <div className="w-40 h-25" key={tech.name}>
+          <motion.div
+            whileHover={{ scale: 1.1 }} // Scales up when hovered
+           className="w-40 h-25" key={tech.name}>
             <Card className="bg-[#ffffff24] shadow-[10px] border-transparent text-center">
               <CardContent className="mx-auto">
                 {/* <BallCanvas icons={tech.icon} /> */}
@@ -30,7 +32,7 @@ export default function Skills() {
               </CardContent>
               {/* <CardFooter className='text-center text-blue-300'>{tech.name}</CardFooter> */}
             </Card>
-          </div>
+          </motion.div>
         ))}
       </motion.div>
     </>
