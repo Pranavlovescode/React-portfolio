@@ -1,9 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 
 function ContactMe() {
+  const [formDetails,setFormDetails] = useState({
+    email:"",
+    name:"",
+    message:""
+  })
+  const handleSubmission = (e) => {
+    e.preventDefault();
+    console.log(formDetails);
+    setTimeout(()=>{
+      formDetails.email = "";
+      formDetails.name = "";
+      formDetails.message = "";
+    },5000)
+  }
   return (
     <>
       <motion.div
@@ -14,7 +28,7 @@ function ContactMe() {
         className="mx-auto grid w-[350px] gap-6"
       >
         <div className="grid gap-2 text-center">
-          <h1 className="text-3xl font-bold text-blue-300 mt-[200px] text-[30px]">
+          <h1 className="md:mb-[-65px] font-extrabold text-blue-300 mt-[200px] text-[30px] ">
             Contact Me
           </h1>
           <p className="text-balance text-muted-foreground">
@@ -29,6 +43,7 @@ function ContactMe() {
               type="email"
               name="email"
               placeholder="m@example.com"
+              onChange={(e)=>setFormDetails({...formDetails,email:e.target.value})}
               className="text-white bg-blue-950 border-2 focus:border-blue-300
                    border-blue-300 p-[5px] rounded-lg "
               required
@@ -43,6 +58,7 @@ function ContactMe() {
               type="text"
               required
               name="name"
+              onChange={(e)=>setFormDetails({...formDetails,name:e.target.value})}
               className="text-white bg-blue-950 border-2 focus:border-blue-300
                    border-blue-300 p-[5px] rounded-lg "
             />
@@ -52,16 +68,18 @@ function ContactMe() {
               <Label htmlFor="message">Message</Label>
             </div>
             <textarea
-              id="name"
+              id="message"
               type="text"
               required
-              name="name"
+              name="message"
+              onChange={(e)=>setFormDetails({...formDetails,message:e.target.value})}
               className="text-white bg-blue-950 border-2 focus:border-blue-300
                    border-blue-300 p-[5px] rounded-lg "
             />
           </div>
           <Button
             type="submit"
+            onClick={handleSubmission}
             className="bg-gradient-to-tr from-blue-600 to-white text-black"
           >
             Send

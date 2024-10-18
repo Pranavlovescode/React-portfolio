@@ -17,18 +17,18 @@ export default function About() {
         whileInView={{ opacity: 1, x: 0 }} // Fades in and moves up when in view
         transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
         viewport={{ once: true, amount: 0.23 }} // Animation triggers once, when 20% of the component is visible
-        className="mx-auto px-[100px]"
+        className="mx-auto md:px-[100px]"
       >
         {/* used card to show the details About me */}
         <Card className="bg-[#ffffff24] shadow-2xl border-transparent">
           <CardHeader>
-            <CardTitle className="text-blue-300 text-2xl">About Me</CardTitle>
-            <CardDescription className="text-slate-300">
+            <CardTitle className="text-blue-300 text-[30px] font-extrabold">About Me</CardTitle>
+            <CardDescription className="text-slate-300 font-semibold">
               Btw I use Linux 🖥️
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col md:flex-row justify-evenly items-center text-white">
-            <div className="px-5">
+            <div className="md:px-5 py-5">
               <img
                 src="/pranav-photo-2.png"
                 alt="My Photo"

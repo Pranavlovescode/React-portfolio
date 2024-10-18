@@ -1,16 +1,15 @@
 import React from "react";
-import { technologies } from "../data/index";
 import BallCanvas from "./canvas/Ball";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter } from "./ui/card";
 
-export default function Skills() {
+export default function Skills({tech}) { // getting the props from the parent component 
   return (
     <>
-      <h2 className="text-blue-300 mt-[300px] p-6 text-[30px] font-semibold px-[100px]">
+      <h2 className="text-blue-300 mt-[300px] p-6 text-[30px] font-extrabold px-[100px] ">
         My Skills
       </h2>
-      <p className="text-white p-6 text-[20px] px-[100px]">
+      <p className="text-white px-[100px]">
         I would like to share that I am familiar with these many skills !!
       </p>
       <motion.div
@@ -20,7 +19,7 @@ export default function Skills() {
         viewport={{ once: true, amount: 0.23 }}
         className="flex flex-row flex-wrap justify-center gap-20 mt-[100px] px-[100px]"
       >
-        {technologies.map((tech) => (
+        {tech.map((tech) => (
           <motion.div
             whileHover={{ scale: 1.1 }} // Scales up when hovered
            className="w-40 h-25" key={tech.name}>

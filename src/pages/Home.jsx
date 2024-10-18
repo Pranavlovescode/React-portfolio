@@ -10,6 +10,7 @@ import { OrbitControls, Preload } from "@react-three/drei";
 import Earth from "@/components/canvas/Earth";
 import Computer from "@/components/canvas/Computer";
 import { motion } from "framer-motion";
+import { technologies } from "@/data";
 
 export default function Home() {
   useEffect(() => {
@@ -76,13 +77,12 @@ export default function Home() {
           <About />
         </div>
         <div className=" " id="skills">
-          <Skills />
+          <Skills tech={technologies} />
         </div>
         <div className=" " id="contact-me">
           <div className="text-white">
-            <div className="flex items-start justify-center py-12">
+            <div className="flex items-start justify-center py-5">
               <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-                <ContactMe />
                 <motion.div
                   initial={{ opacity: 0, x: 50 }} // Starts invisible and slightly lower
                   whileInView={{ opacity: 1, x: 0 }} // Fades in and moves up when in view
@@ -115,6 +115,7 @@ export default function Home() {
                     <Preload all />
                   </Canvas>
                 </motion.div>
+                <ContactMe />
               </div>
             </div>
           </div>
