@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
-import {Link as ScrollLink } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
+import Avatar from "./canvas/Computer";
 
 export default function LandingPage() {
   const downlaodFile = (e) => {
@@ -20,28 +21,33 @@ export default function LandingPage() {
   };
   return (
     <>
-      <div className="pt-32 md:pt-0">
-        <div className="text-blue-300 mt-32 text-center">
-          <h1 className="font-extrabold text-4xl">Hey How's your day !?</h1>
-        </div>
-        <div className="flex flex-row justify-center items-center pt-8">
-          <div className="px-3">
-            <Button
-              onClick={downlaodFile}
-              className="bg-gradient-to-tr from-blue-600 to-white text-black"
-            >
-              Resume
-            </Button>
+      
+        <div className="w-full md:pl-11">
+          <div className="pt-32 md:pt-0">
+            <div className="text-blue-300 mt-32 text-center">
+              <h1 className="font-extrabold text-4xl">Hey How's your day !?</h1>
+            </div>
+            <div className="flex flex-row justify-center items-center pt-8">
+              <div className="px-3">
+                <Button
+                  onClick={downlaodFile}
+                  className="bg-gradient-to-tr from-blue-600 to-white text-black"
+                >
+                  Resume
+                </Button>
+              </div>
+              <div className="px-3">
+                <ScrollLink to="about" duration={500} smooth={true} spy={true}>
+                  <Button className="bg-gradient-to-tl from-blue-600 to-white text-black">
+                    Know More
+                  </Button>
+                </ScrollLink>
+              </div>
+            </div>
           </div>
-          <div className="px-3">
-            <ScrollLink to="about" duration={500} smooth={true} spy={true}>
-              <Button className="bg-gradient-to-tl from-blue-600 to-white text-black">
-                Know More
-              </Button>
-            </ScrollLink>
-          </div>
         </div>
-      </div>
+        
+      
     </>
   );
 }

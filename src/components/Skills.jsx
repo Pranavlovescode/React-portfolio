@@ -21,14 +21,12 @@ export default function Skills() {
         className="flex flex-row flex-wrap justify-center gap-20 mt-[100px] px-[100px]"
       >
         {technologies.map((tech) => (
-          <div            
-            className="w-40 h-25"
-            key={tech.name}
-          >
+          <div className="w-40 h-25" key={tech.name}>
             <Card className="bg-[#ffffff24] shadow-[10px] border-transparent text-center">
-              <CardContent>
-                <BallCanvas icons={tech.icon} />
-                <p className='text-center text-blue-300'>{tech.name}</p>
+              <CardContent className="mx-auto">
+                {/* <BallCanvas icons={tech.icon} /> */}
+                <img src={tech.icon} alt="" className="h-[100px] w-[100px]" />
+                <p className="text-center text-blue-300">{tech.name}</p>
               </CardContent>
               {/* <CardFooter className='text-center text-blue-300'>{tech.name}</CardFooter> */}
             </Card>

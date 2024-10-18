@@ -33,7 +33,7 @@ const Ball = (props) => {
 };
 const BallCanvas = ({ icons }) => {
   return (
-    <Canvas frameloop="always" gl={{ preserveDrawingBuffer: true }}>
+    <Canvas frameloop="always" >
       <ambientLight intensity={0.5} />
       <Ball imgUrl={icons} />
       <OrbitControls enableZoom={false} />
