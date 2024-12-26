@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {Link as ScrollLink} from "react-scroll"
+import { NavLink as Link } from "react-router-dom";
+
 
 
 export default function Navbar() {
@@ -55,59 +56,39 @@ export default function Navbar() {
           >
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-900 :border-gray-700">
               <li>
-                <ScrollLink
+                <Link
                   onClick={() => setFocus("home")}
-                  to="home"
-                  smooth={true}
-                  spy={true}
-                  duration={500}
+                  to="/"                  
                   className={`cursor-pointer block py-2 px-3  bg-blue-700 rounded md:bg-transparent md:p-0  ${
                     focus === "home" ? "md:text-blue-500" : "text-white"
                   }`}
                   aria-current="page"
                 >
                   Home
-                </ScrollLink>
+                </Link>
               </li>
+              
               <li>
-                <ScrollLink
-                  to="about" 
-                  duration={500}
-                  smooth={true}
-                  spy={true}
-                  onClick={() => setFocus("about")}
-                  className={`cursor-pointer block py-2 px-3 md:p-0 md:hover:text-blue-500 text-white  hover:text-white md:hover:bg-transparent ${
-                    focus === "about" ? "md:text-blue-500" : "text-white"
-                  }`}
-                >
-                  About
-                </ScrollLink>
-              </li>
-              <li>
-                <ScrollLink
-                  to="skills"
-                  onClick={() => setFocus("services")}
-                  smooth={true}
-                  spy={true}
-                  duration={500}
+                <Link
+                  to="/skills"
+                  onClick={()=>{
+                    setFocus("skills")
+                  }}                
                   className={`cursor-pointer block py-2 px-3 rounded md:p-0 md:hover:text-blue-500 text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700 ${
-                    focus === "services"
+                    focus === "skills"
                       ? "md:text-blue-500"
                       : "text-white"
                   }`}
                 >
                   Skills
-                </ScrollLink>
+                </Link>
               </li>
               <li>
-                <ScrollLink
-                  to="contact-me"
+                <Link
+                  to="/contact-me"
                   onClick={() => {
                     setFocus("contact");
-                  }}
-                  smooth={true}
-                  spy={true}
-                  duration={500}
+                  }}                  
                   className={`cursor-pointer block py-2 px-3 text-gray-900 rounded md:p-0 md:hover:text-blue-500 dark:text-white hover:bg-gray-700 dark:hover:text-white md:hover:bg-transparent border-gray-700 ${
                     focus === "contact"
                       ? "md:text-blue-500 duration-300"
@@ -115,7 +96,7 @@ export default function Navbar() {
                   }`}
                 >
                   Contact Me
-                </ScrollLink>
+                </Link>
               </li>
             </ul>
           </div>

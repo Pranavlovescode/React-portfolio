@@ -1,14 +1,21 @@
-import { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import HomePage from "@/pages/HomePage";
+import Skills from "@/components/Skills";
+import { technologies } from "./data";
+import ContactMePage from "@/pages/ContactMePage";
 
 
 function App() {
   return (
     <>
       <Navbar />
-      <Home />
+      <Routes>
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/skills" element={<Skills tech={technologies} />} />
+        <Route path="/contact-me" element={<ContactMePage/>}/>
+      </Routes>
+
     </>
   );
 }

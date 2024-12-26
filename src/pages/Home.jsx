@@ -11,6 +11,7 @@ import Earth from "@/components/canvas/Earth";
 import Computer from "@/components/canvas/Computer";
 import { motion } from "framer-motion";
 import { technologies } from "@/data";
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
 
 export default function Home() {
   useEffect(() => {
@@ -47,78 +48,16 @@ export default function Home() {
     <>
       <div className="main">
         <div className=" " id="home">
-          <div className="flex flex-col md:flex-row justify-center overflow-hidden items-center">
-            <LandingPage />
-            <div className="pt-20 h-screen w-full md:pr-10" id="home">
-              <Canvas
-                frameloop="demand"
-                shadows
-                dpr={[1, 2]}
-                gl={{ preserveDrawingBuffer: true }}
-                camera={{ position: [20, 2, 0], fov: 25 }}
-              >
-                <ambientLight intensity={0.5} />
-                <Suspense fallback={<CanvasLoader />}>
-                  <Computer />
-                  <OrbitControls
-                    autoRotate
-                    maxPolarAngle={Math.PI / 2}
-                    minPolarAngle={Math.PI / 2}
-                    enableZoom={false}
-                    enablePan={false}
-                  />
-                  <Preload all />
-                </Suspense>
-              </Canvas>
-            </div>
-          </div>
+          
         </div>
         <div className="" id="about">
-          <About />
+          
         </div>
         <div className=" " id="skills">
           <Skills tech={technologies} />
         </div>
         <div className=" " id="contact-me">
-          <div className="text-white">
-            <div className="flex items-start justify-center py-5">
-              <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }} // Starts invisible and slightly lower
-                  whileInView={{ opacity: 1, x: 0 }} // Fades in and moves up when in view
-                  transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
-                  viewport={{ once: true, amount: 0.23 }}
-                  className="mt-36"
-                >
-                  <Canvas
-                    shadows
-                    frameloop="demand"
-                    dpr={[1, 2]}
-                    gl={{ preserveDrawingBuffer: true }}
-                    camera={{
-                      fov: 45,
-                      near: 0.1,
-                      far: 200,
-                      position: [-4, 0, 6],
-                    }}
-                  >
-                    <ambientLight intensity={0.5} />
-                    <Suspense fallback={<CanvasLoader />}>
-                      <OrbitControls
-                        autoRotate
-                        enableZoom={false}
-                        maxPolarAngle={Math.PI / 2}
-                        minPolarAngle={Math.PI / 2}
-                      />
-                      <Earth />
-                    </Suspense>
-                    <Preload all />
-                  </Canvas>
-                </motion.div>
-                <ContactMe />
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </>
