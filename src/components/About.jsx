@@ -44,7 +44,7 @@ function About() {
               </div>
 
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold text-blue-300">
+                <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
                   Pranav Titambe
                 </h1>
                 <p className="text-muted-foreground text-white">
@@ -95,7 +95,7 @@ function About() {
             {/* Right Column - Details */}
             <div className="space-y-6">
               <div className="space-y-4">
-                <h2 className="text-2xl font-semibold tracking-tight text-blue-300">
+                <h2 className="text-2xl font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
                   About Me
                 </h2>
                 <p className="text-white leading-relaxed">

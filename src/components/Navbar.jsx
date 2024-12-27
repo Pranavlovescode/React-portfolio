@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { NavLink as Link } from "react-router-dom";
 
-
-
-export default function Navbar() {
-  const [focus, setFocus] = useState("home");
+export default function Navbar({ focus, setFocus }) {
   return (
     <>
       <nav className="bg-gray-900 backdrop-blur supports-[backdropFilter]:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-600">
@@ -57,9 +54,11 @@ export default function Navbar() {
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-900 :border-gray-700">
               <li>
                 <Link
-                  onClick={() => setFocus("home")}
-                  to="/"                  
-                  className={`cursor-pointer block py-2 px-3  bg-blue-700 rounded md:bg-transparent md:p-0  ${
+                  onClick={() => {
+                    setFocus("home"), localStorage.setItem("focus", "home");
+                  }}
+                  to="/"
+                  className={`cursor-pointer block py-2 px-3  md:hover:text-blue-500 rounded md:bg-transparent md:p-0  ${
                     focus === "home" ? "md:text-blue-500" : "text-white"
                   }`}
                   aria-current="page"
@@ -67,28 +66,43 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              
+
               <li>
                 <Link
                   to="/skills"
-                  onClick={()=>{
-                    setFocus("skills")
-                  }}                
+                  onClick={() => {
+                    setFocus("skills"), localStorage.setItem("focus", "skills");
+                  }}
                   className={`cursor-pointer block py-2 px-3 rounded md:p-0 md:hover:text-blue-500 text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700 ${
-                    focus === "skills"
-                      ? "md:text-blue-500"
-                      : "text-white"
+                    focus === "skills" ? "md:text-blue-500" : "text-white"
                   }`}
                 >
                   Skills
                 </Link>
               </li>
+
+              <li>
+                <Link
+                  to="/projects"
+                  onClick={() => {
+                    setFocus("projects"),
+                      localStorage.setItem("focus", "projects");
+                  }}
+                  className={`cursor-pointer block py-2 px-3 rounded md:p-0 md:hover:text-blue-500 text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700 ${
+                    focus === "projects" ? "md:text-blue-500" : "text-white"
+                  }`}
+                >
+                  Projects
+                </Link>
+              </li>
+
               <li>
                 <Link
                   to="/contact-me"
                   onClick={() => {
                     setFocus("contact");
-                  }}                  
+                    localStorage.setItem("focus", "contact");
+                  }}
                   className={`cursor-pointer block py-2 px-3 text-gray-900 rounded md:p-0 md:hover:text-blue-500 dark:text-white hover:bg-gray-700 dark:hover:text-white md:hover:bg-transparent border-gray-700 ${
                     focus === "contact"
                       ? "md:text-blue-500 duration-300"

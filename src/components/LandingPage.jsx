@@ -23,20 +23,22 @@ export default function LandingPage() {
       <div className="w-full md:pl-11">
         <div className="pt-32 md:pt-0">
           <div className=" mt-32 text-center">
-            <h1 className="font-extrabold text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-l from-blue-300 to-white/10">Hey How's your day !?</h1>
+            <h1 className="font-extrabold text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+              Hey How's your day !?
+            </h1>
           </div>
           <div className="flex flex-row justify-center items-center pt-8">
             <div className="px-3">
               <Button
                 onClick={downlaodFile}
-                className="bg-gradient-to-tr from-blue-600 to-white text-black"
+                className="bg-gradient-to-tl from-blue-400 to-blue-900 text-black"
               >
                 Resume
               </Button>
             </div>
             <div className="px-3">
               <ScrollLink to="about" duration={500} smooth={true} spy={true}>
-                <Button className="bg-gradient-to-tl from-blue-600 to-white text-black">
+                <Button className="bg-gradient-to-tl from-blue-400 to-blue-900 text-black">
                   Know More
                 </Button>
               </ScrollLink>
