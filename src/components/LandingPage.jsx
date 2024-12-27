@@ -22,8 +22,8 @@ export default function LandingPage() {
     <>
       <div className="w-full md:pl-11">
         <div className="pt-32 md:pt-0">
-          <div className="text-blue-300 mt-32 text-center">
-            <h1 className="font-extrabold text-4xl">Hey How's your day !?</h1>
+          <div className=" mt-32 text-center">
+            <h1 className="font-extrabold text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-l from-blue-300 to-white/10">Hey How's your day !?</h1>
           </div>
           <div className="flex flex-row justify-center items-center pt-8">
             <div className="px-3">

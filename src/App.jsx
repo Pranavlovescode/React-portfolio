@@ -2,8 +2,9 @@ import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "@/pages/HomePage";
 import Skills from "@/components/Skills";
-import { technologies } from "./data";
+import {skillCategories} from "@/data/index";
 import ContactMePage from "@/pages/ContactMePage";
+import { SkillsSection } from "@/pages/skillsSection";
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage/>} />
-        <Route path="/skills" element={<Skills tech={technologies} />} />
+        <Route path="/skills" element={<SkillsSection/>} />
         <Route path="/contact-me" element={<ContactMePage/>}/>
       </Routes>
 

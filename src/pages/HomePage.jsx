@@ -36,7 +36,7 @@ export default function HomePage() {
             </Canvas>
           </div>
         </div>
-        <About />
+        <About id="about" />
       </div>
     </>
   );
