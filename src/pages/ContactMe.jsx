@@ -1,17 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import nodemailer from 'nodemailer';
 import React, { useState } from "react";
-
-const transport = nodemailer.createTransport({
-  host: "live.smtp.mailtrap.io",
-  port: 587,
-  auth: {
-    user: "api",
-    pass: "3c40b771be9beec56d41905f297b2450",
-  },
-});
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function ContactMe() {
   const [formDetails, setFormDetails] = useState({
@@ -25,16 +17,21 @@ function ContactMe() {
     console.log(formDetails);
 
     // Logic for sending email
-    const msg = {
-      to: formDetails.email, // Change to your recipient
-      from: "pranav.titambe@pranavtitambe.in", // Change to your verified sender
-      subject: `Heyy ${formDetails.name}`,
-      text: formDetails.message,
-    };
+    const emailResponse = await axios.post(
+      `${import.meta.env.VITE_BACKEND}/email`,
+      formDetails,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    const info = await transport.sendMail(msg);
-
-    console.log("Message sent: %s", info.messageId);
+    if (emailResponse.status == 200) {
+      toast.success(emailResponse.data.message);
+    } else {
+      toast.error(emailResponse.data.message);
+    }
 
     setTimeout(() => {
       formDetails.email = "";
