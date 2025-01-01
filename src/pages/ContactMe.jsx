@@ -18,7 +18,7 @@ function ContactMe() {
 
     // Logic for sending email
     const emailResponse = await axios.post(
-      `${import.meta.env.VITE_BACKEND}email`,
+      `${import.meta.env.VITE_BACKEND}/email`,
       formDetails,
       {
         headers: {
