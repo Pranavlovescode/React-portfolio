@@ -10,7 +10,7 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND })); // Allow requests from your frontend
+app.use(cors()); // Allow requests from your frontend
 app.use(express.json()); // Parse JSON body
 
 // Set SendGrid API key
