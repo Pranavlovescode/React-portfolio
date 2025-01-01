@@ -1,17 +1,17 @@
 import React from "react";
-import { Button } from "./ui/button";
-import { Link as ScrollLink } from "react-scroll";
+import { Button } from "../components/ui/button";
+import { NavLink as Link } from "react-router-dom";
 
 export default function LandingPage() {
   const downlaodFile = (e) => {
     e.preventDefault();
-    fetch("/pranav_titambe_resume.pdf")
+    fetch("/Pranav_titambe_resume_new.pdf")
       .then((response) => response.blob())
       .then((blob) => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "pranav_titambe_resume.pdf";
+        a.download = "Pranav_titambe_resume_new.pdf";
         a.click();
         document.removeChild(a);
         URL.revokeObjectURL(url);
@@ -37,11 +37,11 @@ export default function LandingPage() {
               </Button>
             </div>
             <div className="px-3">
-              <ScrollLink to="about" duration={500} smooth={true} spy={true}>
+              <a href="#about">
                 <Button className="bg-gradient-to-tl from-blue-400 to-blue-900 text-black">
                   Know More
                 </Button>
-              </ScrollLink>
+              </a>
             </div>
           </div>
         </div>

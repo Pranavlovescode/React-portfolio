@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect } from "react";
-import ContactMe from "@/components/ContactMe";
+import ContactMe from "@/pages/ContactMe";
 import "./styles.css";
 import { Canvas } from "@react-three/fiber";
-import CanvasLoader from "@/components/Loader";
+import CanvasLoader from "@/pages/Loader";
 import { OrbitControls, Preload } from "@react-three/drei";
 import Earth from "@/components/canvas/Earth";
 import { motion } from "framer-motion";

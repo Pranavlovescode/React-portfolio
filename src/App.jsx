@@ -1,4 +1,4 @@
-import Navbar from "./components/Navbar";
+import Navbar from "./pages/Navbar";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "@/pages/HomePage";
 import ContactMePage from "@/pages/ContactMePage";
@@ -12,10 +12,10 @@ function App() {
     <>
       <Navbar focus={focus} setFocus={setFocus} />
       <Routes>
-        {focus == "home" && <Route path="/" element={<HomePage/>} />}
-        {focus == "skills" && <Route path="/skills" element={<SkillsSection/>} />}
-        {focus == "contact" && <Route path="/contact-me" element={<ContactMePage/>} />}
-        {focus == "projects" && <Route path="/projects" element={<ProjectPage/>} />}
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/skills" element={<SkillsSection/>} />
+        <Route path="/contact-me" element={<ContactMePage/>} />
+        <Route path="/projects" element={<ProjectPage/>} />
       </Routes>
 
     </>

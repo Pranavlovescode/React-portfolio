@@ -17,14 +17,14 @@ import { InstagramLogoIcon } from "@radix-ui/react-icons";
 
 function About() {
   return (
-    <div className="min-h-screen p-4 md:p-8 container mx-auto w-full">
+    <div className="min-h-screen p-4 md:p-8 container mx-auto w-full" id="about" >
       <motion.div
         initial={{ opacity: 0, x: 50 }} // Starts invisible and slightly lower
         whileInView={{ opacity: 1, x: 0 }} // Fades in and moves up when in view
         transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
         viewport={{ once: true, amount: 0.23 }}
       >
-        <Card className="max-w-4xl mx-auto overflow-hidden bg-white/20 backdrop-blur-sm border-none">
+        <Card  className="max-w-4xl mx-auto overflow-hidden bg-white/20 backdrop-blur-sm border-none">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8">
             {/* Left Column - Photo and Quick Info */}
             <div className="space-y-6 text-center md:text-left">

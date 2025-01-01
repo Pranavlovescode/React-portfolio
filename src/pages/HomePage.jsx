@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect } from "react";
-import About from "@/components/About";
-import LandingPage from "@/components/LandingPage";
+import About from "@/pages/About";
+import LandingPage from "@/pages/LandingPage";
 import "./styles.css";
 import { Canvas } from "@react-three/fiber";
-import CanvasLoader from "@/components/Loader";
+import CanvasLoader from "@/pages/Loader";
 import { OrbitControls, Preload } from "@react-three/drei";
 import Computer from "@/components/canvas/Computer";
 

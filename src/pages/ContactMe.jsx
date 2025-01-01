@@ -1,7 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
+import nodemailer from 'nodemailer';
 import React, { useState } from "react";
+
+const transport = nodemailer.createTransport({
+  host: "live.smtp.mailtrap.io",
+  port: 587,
+  auth: {
+    user: "api",
+    pass: "3c40b771be9beec56d41905f297b2450",
+  },
+});
 
 function ContactMe() {
   const [formDetails, setFormDetails] = useState({
@@ -9,9 +19,23 @@ function ContactMe() {
     name: "",
     message: "",
   });
-  const handleSubmission = (e) => {
+
+  const handleSubmission = async (e) => {
     e.preventDefault();
     console.log(formDetails);
+
+    // Logic for sending email
+    const msg = {
+      to: formDetails.email, // Change to your recipient
+      from: "pranav.titambe@pranavtitambe.in", // Change to your verified sender
+      subject: `Heyy ${formDetails.name}`,
+      text: formDetails.message,
+    };
+
+    const info = await transport.sendMail(msg);
+
+    console.log("Message sent: %s", info.messageId);
+
     setTimeout(() => {
       formDetails.email = "";
       formDetails.name = "";
