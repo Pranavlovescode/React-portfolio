@@ -7,10 +7,10 @@ import {ProjectPage} from "@/pages/ProjectPage"
 import { useState } from "react";
 
 function App() {
-  const [focus, setFocus] = useState(localStorage.getItem("focus") || "home");
+
   return (
     <>
-      <Navbar focus={focus} setFocus={setFocus} />
+      <Navbar/>
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/skills" element={<SkillsSection/>} />

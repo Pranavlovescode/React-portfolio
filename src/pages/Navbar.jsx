@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink as Link } from "react-router-dom";
 
-export default function Navbar({ focus, setFocus }) {
-  const [focus, setFocus] =useState(null)
+export default function Navbar() {
+    const [focus, setFocus] = useState(localStorage.getItem("focus") || "home");
   return (
     <>
       <nav className="bg-gray-900 backdrop-blur supports-[backdropFilter]:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-600">
