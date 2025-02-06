@@ -26,7 +26,7 @@ function ContactMe() {
         },
       }
     );
-
+    console.log(emailResponse)
     if (emailResponse.status == 200) {
       toast.success(emailResponse.data.message);
       setTimeout(() => {
