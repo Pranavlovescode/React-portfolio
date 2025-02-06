@@ -18,7 +18,7 @@ function ContactMe() {
 
     // Logic for sending email
     const emailResponse = await axios.post(
-      `${import.meta.env.VITE_BACKEND}email`,
+      `${import.meta.env.VITE_BACKEND}/email`,
       formDetails,
       {
         headers: {
@@ -29,6 +29,11 @@ function ContactMe() {
 
     if (emailResponse.status == 200) {
       toast.success(emailResponse.data.message);
+      setTimeout(() => {
+        formDetails.email = "";
+        formDetails.name = "";
+        formDetails.message = "";
+      }, 5000);
     } else {
       toast.error(emailResponse.data.message);
     }
