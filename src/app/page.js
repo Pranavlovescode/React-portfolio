@@ -1,103 +1,518 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { portfolioConfig } from "./config";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gray-900 text-green-400 font-mono">
+      <Terminal />
+    </div>
+  );
+}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+function Terminal() {
+  const [history, setHistory] = useState([]);
+  const [currentInput, setCurrentInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const [commandHistory, setCommandHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [isFocused, setIsFocused] = useState(true);
+  const inputRef = useRef(null);
+  const terminalRef = useRef(null);
+
+  const commands = {
+    help: {
+      description: "Show available commands",
+      execute: () => `Available commands:
+  help     - Show this help message
+  about    - Learn about me
+  skills   - View my technical skills
+  projects - See my projects
+  contact  - Get my contact information
+  clear    - Clear the terminal
+  whoami   - Display current user
+  date     - Show current date and time
+  ls       - List files (portfolio sections)
+  cat      - Read file contents
+  
+Type any command to get started!`
+    },
+    about: {
+      description: "Learn about me",
+      execute: () => {
+        const { about, name } = portfolioConfig;
+        return `About Me
+=========
+
+${about.introduction.replace('[Your Name]', name)}
+
+🎓 Background:
+${about.background.map(item => `   • ${item}`).join('\n')}
+
+💼 Current Role:
+${about.currentRole.map(item => `   • ${item}`).join('\n')}
+
+🎯 Interests:
+${about.interests.map(item => `   • ${item}`).join('\n')}
+
+"${about.quote}"`;
+      }
+    },
+    skills: {
+      description: "View technical skills",
+      execute: () => {
+        const { skills } = portfolioConfig;
+        return `Technical Skills
+===============
+
+Frontend Development:
+├── Languages: ${skills.frontend.languages.join(', ')}
+├── Frameworks: ${skills.frontend.frameworks.join(', ')}
+├── Styling: ${skills.frontend.styling.join(', ')}
+└── Tools: ${skills.frontend.tools.join(', ')}
+
+Backend Development:
+├── Languages: ${skills.backend.languages.join(', ')}
+├── Frameworks: ${skills.backend.frameworks.join(', ')}
+├── Databases: ${skills.backend.databases.join(', ')}
+└── APIs: ${skills.backend.apis.join(', ')}
+
+Cloud & DevOps:
+├── Platforms: ${skills.cloud.platforms.join(', ')}
+├── Containers: ${skills.cloud.containers.join(', ')}
+├── CI/CD: ${skills.cloud.cicd.join(', ')}
+└── Monitoring: ${skills.cloud.monitoring.join(', ')}
+
+Development Tools:
+├── Version Control: ${skills.tools.versionControl.join(', ')}
+├── IDEs: ${skills.tools.ides.join(', ')}
+├── Design: ${skills.tools.design.join(', ')}
+└── Testing: ${skills.tools.testing.join(', ')}
+
+Proficiency Levels:
+⭐⭐⭐⭐⭐ Expert
+⭐⭐⭐⭐☆ Advanced  
+⭐⭐⭐☆☆ Intermediate`;
+      }
+    },
+    projects: {
+      description: "View my projects",
+      execute: () => {
+        const { projects, contact } = portfolioConfig;
+        const projectList = projects.map(project => {
+          return `${project.icon} ${project.name}
+   • ${project.description}
+${project.features.map(feature => `   • ${feature}`).join('\n')}
+   • Technologies: ${project.technologies.join(', ')}
+   • GitHub: ${project.github}`;
+        }).join('\n\n');
+        
+        return `My Projects
+===========
+
+${projectList}
+
+For more projects, visit: ${contact.github}`;
+      }
+    },
+    contact: {
+      description: "Get contact information",
+      execute: () => {
+        const { contact, location, timezone } = portfolioConfig;
+        return `Contact Information
+==================
+
+📧 Email: ${contact.email}
+🌐 Website: ${contact.website}
+💼 LinkedIn: ${contact.linkedin}
+🐱 GitHub: ${contact.github}
+📱 Twitter: ${contact.twitter}
+
+📍 Location: ${location}
+🕐 Timezone: ${timezone}
+
+Let's connect and build something amazing together!
+
+Feel free to reach out for:
+• Collaboration opportunities
+• Technical discussions  
+• Job opportunities
+• Open source contributions`;
+      }
+    },
+    clear: {
+      description: "Clear the terminal",
+      execute: () => "CLEAR"
+    },
+    whoami: {
+      description: "Display current user",
+      execute: () => `guest@portfolio:~$ You are viewing ${portfolioConfig.name}'s portfolio`
+    },
+    date: {
+      description: "Show current date and time",
+      execute: () => new Date().toString()
+    },
+    ls: {
+      description: "List portfolio sections",
+      execute: () => `total 5
+drwxr-xr-x 2 user user 4096 Dec 27 2024 about/
+drwxr-xr-x 2 user user 4096 Dec 27 2024 skills/
+drwxr-xr-x 2 user user 4096 Dec 27 2024 projects/
+drwxr-xr-x 2 user user 4096 Dec 27 2024 contact/
+-rw-r--r-- 1 user user  256 Dec 27 2024 README.md`
+    },
+    cat: {
+      description: "Read file contents",
+      execute: (args) => {
+        const file = args[0];
+        if (!file) {
+          return "cat: missing file operand\nTry 'cat README.md' or 'help' for available commands";
+        }
+        if (file === "README.md") {
+          return `# Welcome to My Portfolio Terminal
+
+This is an interactive terminal-style portfolio website.
+
+## Quick Start
+- Type 'help' to see available commands
+- Use 'about' to learn about me  
+- Try 'projects' to see my work
+- Use 'contact' to get in touch
+
+## Navigation
+- Use UP/DOWN arrows for command history
+- Type 'clear' to clear the terminal
+- All commands are case-insensitive
+
+Happy exploring! 🚀`;
+        }
+        return `cat: ${file}: No such file or directory`;
+      }
+    }
+  };
+
+  const executeCommand = (input) => {
+    const [command, ...args] = input.toLowerCase().trim().split(" ");
+    
+    if (command === "") return "";
+    
+    if (commands[command]) {
+      const result = commands[command].execute(args);
+      if (result === "CLEAR") {
+        setHistory([]);
+        return "";
+      }
+      return result;
+    }
+    
+    return `Command not found: ${command}. Type 'help' for available commands.`;
+  };
+
+  const handleSubmit = () => {
+    if (isTyping || !currentInput.trim()) return;
+    
+    const output = executeCommand(currentInput);
+    const newEntry = {
+      command: currentInput,
+      output: output,
+      timestamp: new Date().getTime()
+    };
+    
+    setHistory(prev => [...prev, newEntry]);
+    setCommandHistory(prev => [...prev, currentInput]);
+    setHistoryIndex(-1);
+    setCurrentInput("");
+    
+    // Refocus input after command execution
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 10);
+  };
+
+  const handleKeyDown = (e) => {
+    if (isTyping) return;
+
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0) {
+        const newIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+        setHistoryIndex(newIndex);
+        setCurrentInput(commandHistory[newIndex]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > -1) {
+        const newIndex = historyIndex + 1;
+        if (newIndex >= commandHistory.length) {
+          setHistoryIndex(-1);
+          setCurrentInput("");
+        } else {
+          setHistoryIndex(newIndex);
+          setCurrentInput(commandHistory[newIndex]);
+        }
+      }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      // Auto-complete functionality
+      const availableCommands = Object.keys(commands);
+      const matches = availableCommands.filter(cmd => cmd.startsWith(currentInput.toLowerCase()));
+      if (matches.length === 1) {
+        setCurrentInput(matches[0]);
+      }
+    }
+  };
+
+  const typeWriter = (text, callback) => {
+    setIsTyping(true);
+    let index = 0;
+    const speed = 1; // Faster typing
+    
+    const type = () => {
+      if (index < text.length) {
+        callback(text.substring(0, index + 1));
+        index++;
+        setTimeout(type, speed);
+      } else {
+        setIsTyping(false);
+        // Refocus input after typing animation completes
+        setTimeout(() => {
+          if (inputRef.current) {
+            inputRef.current.focus();
+          }
+        }, 10);
+      }
+    };
+    
+    type();
+  };
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [history]);
+
+  // Ensure focus is maintained after typing animation completes
+  useEffect(() => {
+    if (!isTyping && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isTyping]);
+
+  // Maintain focus when terminal is clicked
+  useEffect(() => {
+    const handleClick = (e) => {
+      // Only refocus if clicking within the terminal area
+      if (terminalRef.current && terminalRef.current.contains(e.target)) {
+        if (inputRef.current && !isTyping) {
+          inputRef.current.focus();
+        }
+      }
+    };
+
+    const handleBlur = (e) => {
+      // Don't refocus if focus is moving to another input/button
+      if (!e.relatedTarget || e.relatedTarget.tagName !== 'INPUT') {
+        setTimeout(() => {
+          if (inputRef.current && !isTyping) {
+            inputRef.current.focus();
+          }
+        }, 10);
+      }
+    };
+
+    const handleFocus = () => {
+      setIsFocused(true);
+    };
+
+    const handleWindowFocus = () => {
+      if (inputRef.current && !isTyping) {
+        inputRef.current.focus();
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    window.addEventListener('focus', handleWindowFocus);
+    
+    if (inputRef.current) {
+      inputRef.current.addEventListener('blur', handleBlur);
+      inputRef.current.addEventListener('focus', handleFocus);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+      window.removeEventListener('focus', handleWindowFocus);
+      if (inputRef.current) {
+        inputRef.current.removeEventListener('blur', handleBlur);
+        inputRef.current.removeEventListener('focus', handleFocus);
+      }
+    };
+  }, [isTyping]);
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [history]);
+
+  // Initial welcome message
+  useEffect(() => {
+    const welcomeMessage = portfolioConfig.terminal.welcomeMessage.replace('[Your Name]', portfolioConfig.name);
+
+    setHistory([{
+      command: "",
+      output: welcomeMessage,
+      timestamp: new Date().getTime()
+    }]);
+  }, []);
+
+  return (
+    <div className="h-screen flex flex-col bg-gray-900">
+      {/* Terminal Window Header */}
+      {/* <div className="flex items-center justify-between bg-gray-800 px-4 py-3 border-b border-gray-700">
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-5">
+            <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-sm"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></div>
+          </div>
+          <span className="text-gray-400 text-sm font-medium">portfolio@terminal:~</span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <div className="text-gray-400 text-sm font-medium">
+          Terminal Portfolio
+        </div>
+      </div> */}
+
+      {/* Terminal Content */}
+      <div 
+        ref={terminalRef}
+        className="flex-1 overflow-y-auto p-4 bg-gray-900"
+        onClick={() => inputRef.current?.focus()}
+      >
+        {history.map((entry, index) => (
+          <TerminalEntry 
+            key={index} 
+            entry={entry} 
+            typeWriter={typeWriter}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        ))}
+        
+        {/* Current Input Line */}
+        <div className="flex items-center mt-2 space-x-2">
+          <span className="text-green-400 mx-2.5">{portfolioConfig.terminal.prompt}</span>
+          <div className="flex items-center relative terminal-input-container space-x-2">
+            <span className="text-green-400 whitespace-pre font-mono pl-3.5">{currentInput}</span>
+            <BlinkingCursor isFocused={isFocused} />
+            <input
+              ref={inputRef}
+              type="text"
+              value={currentInput}
+              onChange={(e) => setCurrentInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className="absolute top-0 left-0 w-full h-full bg-transparent text-transparent outline-none caret-transparent font-mono"
+              disabled={isTyping}
+              autoComplete="off"
+              spellCheck="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BlinkingCursor({ isFocused }) {
+  return (
+    <span className={`text-green-400 inline-block ${isFocused ? 'terminal-cursor' : 'opacity-50'}`}>
+      █
+    </span>
+  );
+}
+
+// Component to render text with clickable links
+function TerminalText({ text }) {
+  const urlRegex = /(https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|github\.com\/[^\s]+)/g;
+  
+  const parts = text.split(urlRegex);
+  
+  return (
+    <span>
+      {parts.map((part, index) => {
+        if (urlRegex.test(part)) {
+          let href = part;
+          
+          // Add protocol if missing
+          if (part.includes('@')) {
+            href = `mailto:${part}`;
+          } else if (part.startsWith('github.com')) {
+            href = `https://${part}`;
+          } else if (!part.startsWith('http')) {
+            href = `https://${part}`;
+          }
+          
+          return (
+            <a
+              key={index}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 underline cursor-pointer transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {part}
+            </a>
+          );
+        }
+        return part;
+      })}
+    </span>
+  );
+}
+
+function TerminalEntry({ entry, typeWriter }) {
+  const [displayOutput, setDisplayOutput] = useState("");
+  const [shouldType, setShouldType] = useState(true);
+
+  useEffect(() => {
+    if (entry.output && shouldType) {
+      typeWriter(entry.output, setDisplayOutput);
+      setShouldType(false);
+    } else if (entry.output) {
+      setDisplayOutput(entry.output);
+    }
+  }, [entry.output]);
+
+  const renderOutput = (text) => {
+    const lines = text.split('\n');
+    return lines.map((line, index) => (
+      <div key={index}>
+        <TerminalText text={line} />
+        {index < lines.length - 1 && <br />}
+      </div>
+    ));
+  };
+
+  return (
+    <div className="mb-2">
+      {entry.command && (
+        <div className="flex items-center mb-1">
+          <span className="text-green-400 mr-2">{portfolioConfig.terminal.prompt}</span>
+          <span className="text-green-400">{entry.command}</span>
+        </div>
+      )}
+      {displayOutput && (
+        <div className="text-gray-300 font-mono text-sm leading-relaxed whitespace-pre-wrap">
+          {renderOutput(displayOutput)}
+        </div>
+      )}
     </div>
   );
 }
