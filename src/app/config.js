@@ -5,8 +5,8 @@ export const portfolioConfig = {
   // Personal Information
   name: "Pranav Titambe",
   title: "Full Stack Developer",
-  location: "Your City, Country",
-  timezone: "UTC+0",
+  location: "Mumbai, India",
+  timezone: "UTC+5:30",
   
   // Contact Information
   contact: {
@@ -127,11 +127,6 @@ innovative web applications and solving complex problems.`,
     prompt: "guest@portfolio:~$ ",
     welcomeMessage: `Welcome to the Portfolio Terminal v1.0.0
 
-╔═══════════════════════════════════════════════════════════════╗
-║                    Pranav Titambe's Portfolio                 ║
-║                    Interactive Terminal                       ║
-╚═══════════════════════════════════════════════════════════════╝
-
     ____                                  _______ __                  __       
    / __ \\_________ _____  ____ __   __   /_  __(_) /_____ _____ ___  / /_  ___ 
   / /_/ / ___/ __ \`/ __ \\/ __ \`/ | / /    / / / / __/ __ \`/ __ \`__ \\/ __ \\/ _ \\
@@ -145,3 +140,8 @@ Ready for commands...`,
     showTimestamp: false
   }
 };
+
+// ╔═══════════════════════════════════════════════════════════════╗
+// ║                    Pranav Titambe's Portfolio                 ║
+// ║                    Interactive Terminal                       ║
+// ╚═══════════════════════════════════════════════════════════════╝

@@ -5,7 +5,7 @@ import { portfolioConfig } from "./config";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-900 text-green-400 font-mono">
+    <div className="h-screen text-green-400 bg-gray-700 font-mono p-8">
       <Terminal />
     </div>
   );
@@ -42,7 +42,8 @@ Type any command to get started!`
       description: "Learn about me",
       execute: () => {
         const { about, name } = portfolioConfig;
-        return `About Me
+        return {
+          text: `About Me
 =========
 
 ${about.introduction.replace('[Your Name]', name)}
@@ -56,7 +57,9 @@ ${about.currentRole.map(item => `   • ${item}`).join('\n')}
 🎯 Interests:
 ${about.interests.map(item => `   • ${item}`).join('\n')}
 
-"${about.quote}"`;
+"${about.quote}"`,
+          showProfileImage: true
+        };
       }
     },
     skills: {
@@ -202,6 +205,10 @@ Happy exploring! 🚀`;
       if (result === "CLEAR") {
         setHistory([]);
         return "";
+      }
+      // Handle object response with additional data
+      if (typeof result === 'object' && result !== null) {
+        return result;
       }
       return result;
     }
@@ -373,26 +380,26 @@ Happy exploring! 🚀`;
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-gray-900">
-      {/* Terminal Window Header */}
-      {/* <div className="flex items-center justify-between bg-gray-800 px-4 py-3 border-b border-gray-700">
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-5">
-            <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-sm"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></div>
-          </div>
-          <span className="text-gray-400 text-sm font-medium">portfolio@terminal:~</span>
-        </div>
-        <div className="text-gray-400 text-sm font-medium">
-          Terminal Portfolio
-        </div>
-      </div> */}
+    <div className="md:h-[800px] flex flex-col p-5">
 
-      {/* Terminal Content */}
+        <div className="flex items-center justify-between bg-gray-800 px-4 py-3 border-b border-gray-700">
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-sm"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></div>
+            </div>
+            <span className="text-gray-400 text-sm font-bold">portfolio@terminal:~</span>
+          </div>
+          <div className="text-gray-400 font-bold">
+            Terminal Portfolio
+          </div>
+        </div>
+
+        {/* Terminal Content */}
       <div 
         ref={terminalRef}
-        className="flex-1 overflow-y-auto p-4 bg-gray-900"
+        className="flex-1 overflow-y-auto p-4 bg-gray-950"
         onClick={() => inputRef.current?.focus()}
       >
         {history.map((entry, index) => (
@@ -404,10 +411,10 @@ Happy exploring! 🚀`;
         ))}
         
         {/* Current Input Line */}
-        <div className="flex items-center mt-2 space-x-2">
-          <span className="text-green-400 mx-2.5">{portfolioConfig.terminal.prompt}</span>
-          <div className="flex items-center relative terminal-input-container space-x-2">
-            <span className="text-green-400 whitespace-pre font-mono pl-3.5">{currentInput}</span>
+        <div className="flex items-center mt-2">
+          <span className="text-green-400 mr-2">{portfolioConfig.terminal.prompt}</span>
+          <div className="flex items-center relative terminal-input-container">
+            <span className="text-green-400 font-mono">{currentInput}</span>
             <BlinkingCursor isFocused={isFocused} />
             <input
               ref={inputRef}
@@ -480,9 +487,21 @@ function TerminalText({ text }) {
 function TerminalEntry({ entry, typeWriter }) {
   const [displayOutput, setDisplayOutput] = useState("");
   const [shouldType, setShouldType] = useState(true);
+  const [outputData, setOutputData] = useState(null);
 
   useEffect(() => {
-    if (entry.output && shouldType) {
+    if (!entry.output) return;
+    
+    // Handle complex output with additional data
+    if (typeof entry.output === 'object' && entry.output !== null) {
+      if (entry.output.text && shouldType) {
+        typeWriter(entry.output.text, setDisplayOutput);
+        setShouldType(false);
+      } else if (entry.output.text) {
+        setDisplayOutput(entry.output.text);
+      }
+      setOutputData(entry.output);
+    } else if (entry.output && shouldType) {
       typeWriter(entry.output, setDisplayOutput);
       setShouldType(false);
     } else if (entry.output) {
@@ -501,7 +520,7 @@ function TerminalEntry({ entry, typeWriter }) {
   };
 
   return (
-    <div className="mb-2">
+    <div className="mb-4">
       {entry.command && (
         <div className="flex items-center mb-1">
           <span className="text-green-400 mr-2">{portfolioConfig.terminal.prompt}</span>
@@ -509,8 +528,19 @@ function TerminalEntry({ entry, typeWriter }) {
         </div>
       )}
       {displayOutput && (
-        <div className="text-gray-300 font-mono text-sm leading-relaxed whitespace-pre-wrap">
+        <div className="text-gray-300 font-mono leading-relaxed whitespace-pre-wrap">
           {renderOutput(displayOutput)}
+        </div>
+      )}
+      {outputData && outputData.showProfileImage && (
+        <div className="flex justify-start my-3">
+          <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-green-500">
+            <img 
+              src="/profile-pranav.png" 
+              alt="Profile" 
+              className="w-full h-full object-cover" 
+            />
+          </div>
         </div>
       )}
     </div>

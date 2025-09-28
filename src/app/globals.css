@@ -6,14 +6,9 @@
   --terminal-header: #2a2a2a;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 
 body {
-  background: var(--terminal-bg);
   color: var(--terminal-text);
   font-family: var(--font-mono);
   overflow: hidden;
@@ -77,4 +72,5 @@ input::placeholder {
 
 .terminal-cursor {
   animation: terminal-blink 1.2s infinite;
+  margin-left: 0%;
 }
