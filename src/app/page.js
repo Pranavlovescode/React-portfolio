@@ -5,7 +5,7 @@ import { portfolioConfig } from "./config";
 
 export default function Home() {
   return (
-    <div className="h-screen text-green-400 bg-gray-700 font-mono p-8">
+    <div className="h-screen text-green-400 bg-gray-700 font-mono p-8 pb-10">
       <Terminal />
     </div>
   );
@@ -380,7 +380,7 @@ Happy exploring! 🚀`;
   }, []);
 
   return (
-    <div className="md:h-[800px] flex flex-col p-5">
+    <div className="h-[840px] flex flex-col">
 
         <div className="flex items-center justify-between bg-gray-800 px-4 py-3 border-b border-gray-700">
           <div className="flex items-center space-x-4">
@@ -414,7 +414,7 @@ Happy exploring! 🚀`;
         <div className="flex items-center mt-2">
           <span className="text-green-400 mr-2">{portfolioConfig.terminal.prompt}</span>
           <div className="flex items-center relative terminal-input-container">
-            <span className="text-green-400 font-mono">{currentInput}</span>
+            <span className="text-green-400 font-mono text-[16.56px]">{currentInput}</span>
             <BlinkingCursor isFocused={isFocused} />
             <input
               ref={inputRef}
@@ -424,7 +424,7 @@ Happy exploring! 🚀`;
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className="absolute top-0 left-0 w-full h-full bg-transparent text-transparent outline-none caret-transparent font-mono"
+              className="absolute text-2xl top-0 left-0 w-full h-full bg-transparent text-transparent outline-none caret-transparent font-mono"
               disabled={isTyping}
               autoComplete="off"
               spellCheck="false"
